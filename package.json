@@ -1,5 +1,5 @@
 {
-  "name": "finance-management",
+  "name": "yzadmin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,16 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "vue": "^2.6.11"
+    "element-ui": "^2.13.1",
+    "js-cookie": "^2.2.1",
+    "node-sass": "^4.14.0",
+    "nprogress": "^0.2.0",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
