@@ -6,7 +6,7 @@
       <app-link  v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item
             :index="resolvePath(onlyOneChild.path)"
-                      :class="{'submenu-title-noDropdown':!isNest}"
+                      :class="[isNest ? 'submenu-title-noDropdown':null]"
         >
           <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
                 :title="onlyOneChild.meta.title"/>
@@ -50,10 +50,13 @@
         type: Boolean,
         default: false
       },
+
       basePath: {
         type: String,
         default: ''
       }
+    },
+    mounted(){
     },
     data() {
       // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
@@ -97,14 +100,11 @@
       },
 
       resolvePath(routePath) {
-        // console.dir(path.resolve(this.basePath, routePath));
+        //basePath是上级路由，routePath是可以点击的路由
         return path.resolve(this.basePath, routePath)
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  .v-application ul, .v-application ol{
-    padding-left : 0px;
-  }
 </style>

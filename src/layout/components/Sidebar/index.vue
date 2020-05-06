@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="sideMenuContainer">
         <el-menu
+            class="sideMenu"
             mode="vertical"
             :default-active="$route.path"
             background-color="#263238"
@@ -10,7 +11,7 @@
           <sidebar-item v-for="route in routes"
                         :key="route.path"
                         :item="route"
-                        :base-path="basePath+route.path"/>
+                        :base-path="route.path"/>
         </el-menu>
   </div>
 </template>
@@ -31,8 +32,9 @@
         return this.$route.matched[0].path + '/'
       },
       routes() {
-        let routes = this.$router.options.routes
+        const routes = this.$router.options.routes
           .filter(route => route.path == this.$route.matched[0].path)
+        console.dir(routes[0].children);
         return routes[0].children;
       },
       variables() {
@@ -42,8 +44,28 @@
   }
 </script>
 <style lang="scss" scoped>
-  .v-application ul, .v-application ol{
-    padding-left : 0px;
+  .el-menu{
+    border-right:0px;
   }
+  .sideMenuContainer{
+    background: #263238;
+    height: 100%;
+    height: calc(100vh - 60px);
+    .sideMenu{
+      overflow-y: hidden;
+      &:hover{
+        overflow-y: auto;
+      }
+      flex: 0 0 200px;
+      max-width: 200px;
+      min-width: 200px;
+      background: #263238;
+      width: 200px;
+      z-index: 10;
+      height: 100%;
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    }
+  }
+
 </style>
 
