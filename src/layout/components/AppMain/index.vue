@@ -1,12 +1,11 @@
 <template>
   <div class="main-container">
-    <el-backtop :visibility-height="300" target=".__panel">
+    <el-backtop :visibility-height="300" target=".Backtop">
     </el-backtop>
-    <div class="breadcrumb-container">
-      <breadcrumb class="breadcrumb"/>
-    </div>
     <transition name="fade-transform" mode="out-in">
-      <router-view  class="view-container"/>
+      <main-card :key="key">
+        <router-view/>
+      </main-card>
     </transition>
   </div>
 </template>
@@ -14,9 +13,11 @@
 <script>
   // import Breadcrumb from "./Breadcrumb";
 
+  import MainCard from "@/components/mainCard/index";
+
   export default {
     name: "AppMain",
-
+    components: {MainCard},
     // components: {Breadcrumb},
     computed: {
       key() {
@@ -27,4 +28,8 @@
 </script>
 
 <style lang="scss" scoped>
+  .main-container{
+    padding:20px;
+  }
+
 </style>

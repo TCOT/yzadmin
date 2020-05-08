@@ -9,7 +9,7 @@
                       :class="[isNest ? 'submenu-title-noDropdown':null]"
         >
           <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
-                :title="onlyOneChild.meta.title"/>
+                :title="generateTitle(onlyOneChild.meta.title)"/>
         </el-menu-item>
       </app-link>
     </template>
@@ -18,7 +18,7 @@
       <template slot="title">
         <item v-if="item.meta"
               :icon="item.meta && item.meta.icon"
-              :title="item.meta.title"/>
+              :title="generateTitle(item.meta.title)"/>
       </template>
       <sidebar-item
           v-for="child in item.children"
@@ -36,6 +36,7 @@
   import path from 'path'
   import Item from './Item'
   import AppLink from './Link'
+  import {generateTitle} from "@/utils/i18n";
 
   export default {
     name: 'SidebarItem',
@@ -74,6 +75,7 @@
           }
         })
       },
+      generateTitle,
       hasOneShowingChild(children = [], parent) {
         const showingChildren = children.filter(item => {
           if (item.hidden) {

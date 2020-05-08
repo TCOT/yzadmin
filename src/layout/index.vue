@@ -1,12 +1,12 @@
 <template>
-  <el-container>
+  <el-container style="height: 100%">
     <global-header/>
-    <el-container style="padding-top: 60px">
+    <el-container style="padding-top: 60px;">
       <el-aside width="200px" style="position: fixed">
         <sidebar/>
       </el-aside>
-      <el-main style="padding-left: 220px">
-        <div>主要内容</div>
+      <el-main class="Backtop" style="padding-left: 200px;background-color: #f1f4f5;height: 100%">
+        <app-main/>
       </el-main>
     </el-container>
   </el-container>
@@ -17,12 +17,19 @@
   import store from '@/store'
   import Sidebar from "@/layout/components/Sidebar/index";
   import GlobalHeader from "@/layout/components/GlobalHeader/index";
+  import AppMain from "@/layout/components/AppMain/index";
 
   export default {
     name: 'Layout',
-    components: {GlobalHeader, Sidebar},
+    components: {AppMain, GlobalHeader, Sidebar},
   }
 </script>
+
+<style>
+  a {
+    text-decoration: none
+  }
+</style>
 
 <style lang="scss" scoped>
   .mainContent-container {

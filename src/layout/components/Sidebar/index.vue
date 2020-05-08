@@ -32,10 +32,7 @@
         return this.$route.matched[0].path + '/'
       },
       routes() {
-        const routes = this.$router.options.routes
-          .filter(route => route.path == this.$route.matched[0].path)
-        console.dir(routes[0].children);
-        return routes[0].children;
+        return this.$router.options.routes
       },
       variables() {
         return variables
