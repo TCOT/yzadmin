@@ -14,7 +14,6 @@ Vue.use(VueI18n)
 const enLocale = splitLocale(DeepCopy(locale), 'en')
 const zhLocale = splitLocale(DeepCopy(locale), 'zh')
 
-console.dir(locale);
 const messages = {
   en: {
     ...enLocale,
