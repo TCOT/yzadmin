@@ -18,7 +18,7 @@
     padding-left: 15px;
 
     .logo {
-      font-size: 50px;
+      font-size: 45px;
     }
 
     .logo-title {
