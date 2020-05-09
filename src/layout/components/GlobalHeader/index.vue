@@ -1,10 +1,10 @@
 <template>
-<!--  <transition name="showHeader">-->
+  <transition name="showHeader">
     <div class="header-fix">
       <head-left/>
       <head-right/>
     </div>
-<!--  </transition>-->
+  </transition>
 </template>
 
 <script>

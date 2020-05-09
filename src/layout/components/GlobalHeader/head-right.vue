@@ -23,7 +23,7 @@
 
 <style lang="scss" scoped>
   svg {
-    font-size: 45px;
+    font-size: 40px;
   }
 
   .head-right {
@@ -31,7 +31,15 @@
     align-items: center;
     padding-right: 15px;
     .head-right-component{
+      display: flex;
+      align-items: center;
+      height: 100%;
       padding: 0 3px;
+      cursor: pointer;
+      transition: all .3s;
+      &:hover{
+        background-color: #f9f9f9;
+      }
     }
   }
 </style>
