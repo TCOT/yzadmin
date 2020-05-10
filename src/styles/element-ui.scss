@@ -1,3 +1,9 @@
+//覆盖ele styles
+.el-submenu__title span{
+  vertical-align: top;
+  margin-left: 10px;
+}
+
 // cover some element-ui styles
 .el-header {
   padding: 0px;

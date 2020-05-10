@@ -3,6 +3,7 @@
         <el-menu
             class="sideMenu"
             mode="vertical"
+            :collapse="isCollapse"
             :default-active="$route.path"
             background-color="#263238"
             text-color="rgba(255,255,255,.65)"
@@ -18,6 +19,7 @@
 
 <script>
   import SidebarItem from './SidebarItem'
+  import { mapGetters } from 'vuex'
   import variables from '@/styles/variables.scss'
   import store from '@/store'
   export default {
@@ -28,6 +30,9 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'sidebar'
+      ]),
       basePath() {
         return this.$route.matched[0].path + '/'
       },
@@ -37,6 +42,9 @@
       variables() {
         return variables
       },
+      isCollapse() {
+        return !this.sidebar.opened
+      }
     },
   }
 </script>

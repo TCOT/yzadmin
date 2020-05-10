@@ -18,10 +18,17 @@
   import Sidebar from "@/layout/components/Sidebar/index";
   import GlobalHeader from "@/layout/components/GlobalHeader/index";
   import AppMain from "@/layout/components/AppMain/index";
+  import ResizeHandler from "@/layout/components/mixin/ResizeHandler";
 
   export default {
     name: 'Layout',
+    mixins: [ResizeHandler],
     components: {AppMain, GlobalHeader, Sidebar},
+    computed: {
+      device() {
+        return this.$store.state.app.device
+      }
+    }
   }
 </script>
 

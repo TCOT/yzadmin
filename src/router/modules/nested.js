@@ -8,7 +8,8 @@ const nestedRouter = {
   redirect: '/nested/menu1/menu1-1',
   name: 'Nested',
   meta: {
-    title: 'Nested Routes'
+    title: 'Nested Routes',
+    icon:'menu-unfold'
   },
   children: [
     {
