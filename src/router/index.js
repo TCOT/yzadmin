@@ -10,9 +10,22 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
   {
     path: '',
-    redirect: '/nested',
+    redirect: '/table/basicForm',
   },
   nestedRouter,
+  {
+    path: '/table',
+    component: Layout,
+    meta: {
+      title: '表格',
+      icon:'table'
+    },
+    children: [{
+      path: 'basicForm',
+      component: () => import('@/views/table/basicForm/index'),
+      meta: { title: '基础表格' }
+    },]
+  },
   {
     path: '/404',
     component: () => import('@/views/error-page/404'),
