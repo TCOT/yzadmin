@@ -1,7 +1,7 @@
 <template>
-  <div class="main-container">
-    <el-backtop :visibility-height="300" target=".Backtop">
-    </el-backtop>
+  <div class="main-container" :class="classObj">
+<!--    <el-backtop :visibility-height="300" target=".Backtop">-->
+<!--    </el-backtop>-->
     <transition name="fade-transform" mode="out-in">
       <main-card :key="key">
         <router-view/>
@@ -14,12 +14,22 @@
   // import Breadcrumb from "./Breadcrumb";
 
   import MainCard from "@/components/mainCard/index";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "AppMain",
     components: {MainCard},
     // components: {Breadcrumb},
     computed: {
+      ...mapGetters([
+        'sidebar'
+      ]),
+      classObj(){
+        return {
+          appMainhideSidebar: !this.sidebar.opened,
+          // withoutAnimation: this.sidebar.withoutAnimation,
+        }
+      },
       key() {
         return this.$route.path
       }
@@ -28,8 +38,17 @@
 </script>
 
 <style lang="scss" scoped>
-  .main-container{
-    padding:20px;
+  .appMainhideSidebar{
+    padding-left: 74px!important;
+  }
+
+  .main-container {
+    padding: 20px;
+    padding-left: 220px;
+    width: 100%;
+    background-color: #f1f4f5;
+    height: 100%;
+    transition: padding-left 0.28s;
   }
 
 </style>

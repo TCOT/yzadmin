@@ -7,6 +7,7 @@
 @import './ui-custom.scss';
 body {
     margin: 0;
+  overflow-x: hidden;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

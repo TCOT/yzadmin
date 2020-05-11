@@ -20,7 +20,7 @@
     transition: all .3s;
 
     &:hover {
-      background-color: #f9f9f9;
+      background-color: rgba(0, 0, 0, .025);
     }
   }
 </style>

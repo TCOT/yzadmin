@@ -85,6 +85,9 @@
 
   .nest-menu .el-submenu > .el-submenu__title,
   .el-menu-item {
+    span{
+      margin-left: 0px;
+    }
     &:hover {
       // you can use $subMenuHover
       //background-color: $menuActiveBg !important;
