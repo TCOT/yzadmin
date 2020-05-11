@@ -1,9 +1,9 @@
 <template>
-  <el-container style="height: 100%">
+  <el-container>
     <global-header/>
     <el-container style="padding-top: 60px;">
-        <sidebar/>
-        <app-main/>
+      <sidebar/>
+      <app-main/>
     </el-container>
   </el-container>
 </template>
@@ -28,15 +28,14 @@
   a {
     text-decoration: none
   }
+
+
 </style>
 
 <style lang="scss" scoped>
-
-
   .mainContent-container {
     display: flex;
     flex: 1;
     height: calc(100% - 60px);
-
   }
 </style>

@@ -43,11 +43,9 @@
   }
 
   .main-container {
-    padding: 20px;
-    padding-left: 220px;
+    padding: 20px 20px 20px 220px;
     width: 100%;
     background-color: #f1f4f5;
-    height: 100%;
     transition: padding-left 0.28s;
   }
 
