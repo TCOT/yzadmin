@@ -1,7 +1,6 @@
 <template>
-  <div class="main-container" :class="classObj">
-<!--    <el-backtop :visibility-height="300" target=".Backtop">-->
-<!--    </el-backtop>-->
+  <div class="main-container " :class="classObj" >
+    <el-backtop :visibility-height="50"></el-backtop>
     <transition name="fade-transform" mode="out-in">
       <main-card :key="key">
         <router-view/>
