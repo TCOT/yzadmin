@@ -22,7 +22,7 @@ const routes = [
     },
     children: [{
       path: 'basicForm',
-      component: () => import('@/views/table/basicForm/index'),
+      component: () => import('@/views/table/basicTable/index'),
       meta: { title: '基础表格' }
     },]
   },

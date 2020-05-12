@@ -7,12 +7,12 @@ import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
 import locale from './locale'
 
 import {splitLocale} from "@/utils/i18n";
-import {DeepCopy} from "@/utils/base";
+import {deepCopy} from "@/utils/base";
 
 
 Vue.use(VueI18n)
-const enLocale = splitLocale(DeepCopy(locale), 'en')
-const zhLocale = splitLocale(DeepCopy(locale), 'zh')
+const enLocale = splitLocale(deepCopy(locale), 'en')
+const zhLocale = splitLocale(deepCopy(locale), 'zh')
 
 const messages = {
   en: {

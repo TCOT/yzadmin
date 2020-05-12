@@ -35,7 +35,7 @@ service.interceptors.response.use(
         type: 'warning',
         duration: 2 * 1000
       })
-      return Promise.reject(new Error(errMsg))
+      return Promise.resolve('200')
     } else {
       return res
     }
@@ -47,7 +47,7 @@ service.interceptors.response.use(
       type: 'warning',
       duration: 2 * 1000
     })
-    return Promise.reject(error)
+    return Promise.resolve('500')
   }
 )
 

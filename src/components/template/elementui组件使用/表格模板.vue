@@ -91,9 +91,6 @@
     methods: {
       deleteRow(row) {
       },
-      viewRow(row) {
-        this.detailDrawer = true
-      },
       addRow() {
         this.addDrawer = true
       },

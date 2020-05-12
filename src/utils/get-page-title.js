@@ -1,4 +1,4 @@
-const title = '金融'
+const title = 'YZADMIN'
 
 export default function getPageTitle(pageTitle) {
   if (pageTitle) {

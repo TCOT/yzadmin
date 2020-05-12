@@ -72,9 +72,6 @@
       }
     }
   }
-  .el-menu {
-    border-right: 0px;
-  }
 
   .sideMenuContainer {
     background: #263238;

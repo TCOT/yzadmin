@@ -29,13 +29,22 @@
       <el-table-column prop="name" :label="$t('global.name')">
       </el-table-column>
 
+      <el-table-column prop="status" label="状态">
+        <template v-slot="{row}">
+          <el-tag
+              :type="row.status | status2Color">
+            {{row.status | status2text}}
+          </el-tag>
+        </template>
+      </el-table-column>
 
-
-      <el-table-column :label="$t('global.enable')">
-        <template>
+      <el-table-column prop="enable" :label="$t('global.enable')">
+        <template v-slot="{row}">
           <el-switch
+              v-model="row.enable"
               :active-value="1"
               :inactive-value="0"
+              @change="changeEnable(row)"
               active-color="#13ce66">
           </el-switch>
         </template>
@@ -46,6 +55,7 @@
               type="primary"
               size="small"
               plain
+              @click="editRow(row)"
           >
             {{$t('global.edit')}}
           </el-button>
@@ -54,6 +64,7 @@
             <el-button
                 slot="reference"
                 type="danger"
+                @click="deleteRow(row)"
                 plain size="small"
             >
               {{$t('global.delete')}}
@@ -63,7 +74,7 @@
       </el-table-column>
     </el-table>
     <pagination
-        :total="total"
+        :total="this.list.length"
         :page.sync="listQuery.page"
         :limit.sync="listQuery.limit"/>
   </div>
@@ -71,25 +82,41 @@
 
 <script>
   import Pagination from "@/components/table/Pagination/index";
+  import {deepCopy} from "@/utils/base";
+  import {_getBasicTableList} from "@/api/table";
 
   export default {
     name: "index",
     components: {Pagination},
     created() {
-      this.getVirtualServiceList();
+      this.getList();
+    },
+    filters: {
+      status2Color(status) {
+        const map = {
+          0: 'info',
+          1: 'success'
+        }
+        return map[status]
+      },
+      status2text(status) {
+        const map = {
+          0: '未连接',
+          1: '连接'
+        }
+        return map[status]
+      },
     },
     data() {
       return {
-        rowID: null,
         loading: false,
         list: [],
-        total: 0,
         listQuery: {
           page: 1,
           limit: 10,
         },
         tempList: [],
-        selectedService: []
+        selectedRows:[],
       }
     },
     computed: {
@@ -103,55 +130,34 @@
           this.tempList = this.list.slice((this.listQuery.page - 1) * this.listQuery.limit,
             this.listQuery.page * this.listQuery.limit);
         },
-        immediate: true,
         deep: true
       },
     },
     methods: {
       handleSelectionChange(val) {
-        let selectedID = []
+        this.selectedRows = []
         for (let item of val) {
-          selectedID.push(item.id)
+          this.selectedRows.push(item.name)
         }
-        this.selectedService = selectedID.join(',');
       },
       async changeEnable(row) {
+        console.dir(row);
+      },
+      async getList() {
         this.loading = true
-        try {
-          await _enableOneVirtualService({
-            id: row.id,
-            enable: row.enable
-          })
-          this.getVirtualServiceList()
-          this.loading = false
-        } catch (e) {
-          this.loading = false
-        }
+        const {data} = await _getBasicTableList();
+        this.list = data;
+        this.listQuery = deepCopy(this.listQuery);
+        this.loading = false
       },
-      async getVirtualServiceList() {
-        this.loading = true
-        try {
-          let {data} = await _getVirtualServiceList();
-          this.list = data;
-          this.total = this.list.length;
-          this.listQuery = objectAssign({}, this.listQuery);
-          this.loading = false
-        } catch (e) {
-          this.loading = false
-        }
+      editRow(row) {
+        console.dir(row);
       },
-      async deleteOneService(row) {
-        await delService({
-          id: row.id + ''
-        })
-        this.getVirtualServiceList()
-      },
-      viewRow(row) {
-        this.rowID = row.id
-        this.detailDrawer = true
+      deleteRow(row){
+        console.dir(row);
       },
       addRow() {
-        this.addDrawer = true
+
       },
     }
   }
