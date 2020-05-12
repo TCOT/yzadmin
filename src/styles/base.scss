@@ -51,32 +51,5 @@
   align-items: center
 }
 
-//抽屉布局 顶部和底部高度固定，中间自适应
-.el-drawer__header {
-  height: 70px;
-  padding: 20px;
-  margin-bottom: 0px;
-  font-size: 20px;
-}
 
-.el-drawer__body {
-  height: calc(100% - 70px);
-  flex: 1;
-}
-
-.drawer-content-container {
-  padding-left: 30px;
-  padding-right: 30px;
-  overflow: auto;
-  flex: 1;
-  height: calc(100% - 80px);
-}
-
-.drawer-footer-container {
-  border-top: 1px solid #dcdfe6;
-  display: flex;
-  height: 80px;
-  justify-content: center;
-  align-items: center
-}
 // 主页面 顶部 --- 图标+标题 中间表格的布局

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="content-top">
+    <div class="table-top">
       <el-button
-          size="small" type="success" plain>{{$t('global.new')}}
+          size="small" type="success" plain @click="createDrawer = true">{{$t('global.new')}}
       </el-button>
       <div>
         <el-popconfirm
@@ -77,6 +77,14 @@
         :total="this.list.length"
         :page.sync="listQuery.page"
         :limit.sync="listQuery.limit"/>
+    <el-drawer
+        title="新建"
+        :visible.sync="createDrawer"
+        direction="rtl"
+        size="900px"
+    >
+      <create-one v-if="createDrawer"/>
+    </el-drawer>
   </div>
 </template>
 
@@ -84,10 +92,11 @@
   import Pagination from "@/components/table/Pagination/index";
   import {deepCopy} from "@/utils/base";
   import {_getBasicTableList} from "@/api/table";
+  import CreateOne from "@/views/table/basicTable/createOne";
 
   export default {
     name: "index",
-    components: {Pagination},
+    components: {CreateOne, Pagination},
     created() {
       this.getList();
     },
@@ -117,6 +126,7 @@
         },
         tempList: [],
         selectedRows:[],
+        createDrawer:false,
       }
     },
     computed: {
