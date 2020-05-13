@@ -15,7 +15,7 @@
               v-model="form.ip"
               placeholder="0.0.0.0/0"/>
         </el-col>
-        <el-col :span="8">
+        <el-col :push="1" :span="8">
           <el-switch
               v-model="form.enable"
               :active-value="1"
@@ -28,6 +28,14 @@
         <el-input
             v-model="form.desc"
             placeholder="0.0.0.0/0"/>
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-switch
+            v-model="form.enable"
+            :active-value="1"
+            :inactive-value="0"
+            active-color="#13ce66">
+        </el-switch>
       </el-form-item>
       <el-form-item>
         <el-button type="primary">提交</el-button>
