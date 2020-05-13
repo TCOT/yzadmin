@@ -74,7 +74,7 @@
       </el-table-column>
     </el-table>
     <pagination
-        :total="this.list.length"
+        :total="listQuery.total"
         :page.sync="listQuery.page"
         :limit.sync="listQuery.limit"/>
     <el-drawer
@@ -123,15 +123,11 @@
         listQuery: {
           page: 1,
           limit: 10,
+          total: 0
         },
         tempList: [],
-        selectedRows:[],
-        createDrawer:false,
-      }
-    },
-    computed: {
-      isMutilDel() {
-        return this.selectedService == '' ? false : true
+        selectedRows: [],
+        createDrawer: false,
       }
     },
     watch: {
@@ -157,13 +153,13 @@
         this.loading = true
         const {data} = await _getBasicTableList();
         this.list = data;
-        this.listQuery = deepCopy(this.listQuery);
+        this.listQuery.total = data.length;
         this.loading = false
       },
       editRow(row) {
         console.dir(row);
       },
-      deleteRow(row){
+      deleteRow(row) {
         console.dir(row);
       },
       addRow() {
