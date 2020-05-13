@@ -1,5 +1,15 @@
 //覆盖ele styles
 
+//el表单左对齐UI统一
+.el-form-item:not(.is-required) > label {
+  padding-left: 10px;
+}
+
+//让el的input移上去显示小手
+.el-input__inner {
+  cursor: pointer;
+}
+
 .el-button.el-popover__reference{
   margin-left: 10px;
 }

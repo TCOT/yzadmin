@@ -10,9 +10,21 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
   {
     path: '',
-    redirect: '/table/basicForm',
+    redirect: '/form/basicForm',
   },
-  nestedRouter,
+  {
+    path: '/form',
+    component: Layout,
+    meta: {
+      title: '表单',
+      icon:'table'
+    },
+    children: [{
+      path: 'basicForm',
+      component: () => import('@/views/form/basicForm/index'),
+      meta: { title: '基础表单' }
+    },]
+  },
   {
     path: '/table',
     component: Layout,
@@ -21,11 +33,12 @@ const routes = [
       icon:'table'
     },
     children: [{
-      path: 'basicForm',
+      path: 'basicTable',
       component: () => import('@/views/table/basicTable/index'),
       meta: { title: '基础表格' }
     },]
   },
+  nestedRouter,
   {
     path: '/404',
     component: () => import('@/views/error-page/404'),
