@@ -1,3 +1,8 @@
+//表单UI
+.customForm{
+  max-width: 600px;
+}
+
 //抽屉布局 顶部和底部高度固定，中间自适应
 .el-drawer__body{
   height: calc(100% - 60px);
