@@ -11,7 +11,7 @@ export function _getBasicTableList() {
   }
   for (let i =0;i<=99;i++){
     res.data.push({
-      name:i,
+      name:''+i,
       enable: 1,
       status:1
     })

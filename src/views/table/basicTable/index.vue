@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div class="table-top">
-      <el-button
-          size="small" type="success" plain @click="createDrawer = true">{{$t('global.new')}}
-      </el-button>
-      <div>
+    <el-row class="table-top" type="flex">
+      <el-col :span="8">
+        <el-button
+            size="small" type="success" plain @click="createDrawer = true">{{$t('global.new')}}
+        </el-button>
+      </el-col>
+      <el-col :span="8">
+        <el-input
+            v-model="listQuery.nameFilter"
+            size="small"
+            placeholder="输入名称关键字搜索"/>
+      </el-col>
+      <el-col :span="8">
         <el-popconfirm
             :title="$t('global.confirmDeletion')"
         >
@@ -13,12 +21,13 @@
           >{{$t('global.batchDeletion')}}
           </el-button>
         </el-popconfirm>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
     <el-table
         v-loading="loading"
         :data="tempList"
         @selection-change="handleSelectionChange"
+        :filter-method="filterHandler"
         border
         highlight-current-row>
       <el-table-column
@@ -123,7 +132,8 @@
         listQuery: {
           page: 1,
           limit: 10,
-          total: 0
+          total: 0,
+          nameFilter: '',
         },
         tempList: [],
         selectedRows: [],
@@ -134,12 +144,21 @@
       listQuery: {
         handler(val) {
           this.tempList = this.list.slice((this.listQuery.page - 1) * this.listQuery.limit,
-            this.listQuery.page * this.listQuery.limit);
+            this.listQuery.page * this.listQuery.limit)
+            .filter(item => item.name.toLowerCase().includes(val.nameFilter.toLowerCase()));
+          val.nameFilter !== ''
+            ? this.listQuery.total = this.tempList.length
+            : this.listQuery.total = this.list.length
         },
         deep: true
       },
     },
     methods: {
+      filterHandler(value, row, column) {
+        console.dir(value);
+        console.dir(row);
+        console.dir(column);
+      },
       handleSelectionChange(val) {
         this.selectedRows = []
         for (let item of val) {

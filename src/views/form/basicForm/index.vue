@@ -38,7 +38,7 @@
         </el-switch>
       </el-form-item>
       <el-form-item label="复选框">
-        <el-checkbox-group v-model="form.checkList">
+        <el-checkbox-group  v-model="form.checkList">
           <el-checkbox label="复选框 A" ></el-checkbox>
           <el-checkbox label="复选框 B" ></el-checkbox>
           <el-checkbox label="禁用" disabled></el-checkbox>
