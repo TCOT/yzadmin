@@ -37,6 +37,14 @@
             active-color="#13ce66">
         </el-switch>
       </el-form-item>
+      <el-form-item label="复选框">
+        <el-checkbox-group v-model="form.checkList">
+          <el-checkbox label="复选框 A" ></el-checkbox>
+          <el-checkbox label="复选框 B" ></el-checkbox>
+          <el-checkbox label="禁用" disabled></el-checkbox>
+          <el-checkbox label="选中且禁用" disabled></el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary">提交</el-button>
       </el-form-item>
@@ -55,7 +63,8 @@
         form: {
           ip: 1,
           desc: '',
-          enable: 1
+          enable: 1,
+          checkList:['复选框 A','选中且禁用']
         },
         rules: {
           ip: formValidate({

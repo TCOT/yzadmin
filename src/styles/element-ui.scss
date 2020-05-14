@@ -1,5 +1,11 @@
 //覆盖ele styles
 
+//增大el checkbox
+.el-checkbox__inner{
+  width: 15px;
+  height: 15px;
+}
+
 //el表单左对齐UI统一
 .el-form-item:not(.is-required) > label {
   padding-left: 10px;
