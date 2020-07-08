@@ -1,3 +1,90 @@
+import {saveAs} from 'file-saver'
+
+//封装ele的指定字段表单校验
+export function validateField(fields = [], validateFn) {
+  const self = this
+  function validate(fieldIndex) {
+    if (fields.length == fieldIndex) {
+      validateFn ? validateFn() : ''
+    } else {
+      self.$refs.form.validateField(fields[fieldIndex], (errMsg) => {
+        if (!errMsg) {
+          validate(fieldIndex + 1)
+        }
+      })
+    }
+  }
+
+  validate(0)
+}
+
+//封装表单校验的提交
+export function formSubmit({fn, formName = 'form', secondeValidate}) {
+  this.$refs[`${formName}`].validate(async valid => {
+    if (valid) {
+      if (!secondeValidate) {
+        fn()
+      } else if (secondeValidate()) {
+        fn()
+      }
+    } else {
+      this.$Message(this.$t('submitErr'), 'error')
+    }
+  })
+}
+
+//封装fetch
+export async function fetch(fetchFunction, onSuccess, onFailure) {
+  try {
+    if (this.loading !== undefined)
+      this.loading = true
+    const {data} = await fetchFunction()
+    onSuccess(data)
+    if (this.loading !== undefined)
+      this.loading = false
+    return Promise.resolve('ok')
+  } catch (e) {
+    if (this.loading !== undefined)
+      this.loading = false
+    return Promise.resolve('err')
+  }
+}
+
+
+/**
+ * 判断对象是否拥有属性
+ */
+export function hasProperty(object) {
+  return Object.keys(deepCopy(object)).length > 0 ? true : false
+}
+/**
+ * json数组 多属性去重
+ * @param arr
+ * @param rest 'a','b'
+ * @returns {[]}
+ */
+export function distinct(arr, ...rest) {
+  const cache = [];
+  let t;
+
+  function check(item) {
+    let trueList = [];
+    let args;
+    for (args of rest) {
+      trueList.push(item[args] === t[args])
+    }
+    return trueList.every(item => item)
+  }
+
+  for (t of arr) {
+    if (cache.find(check)) {
+      continue;
+    }
+    cache.push(t);
+  }
+  return cache;
+}
+
 export function deepCopy(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
@@ -7,7 +94,7 @@ export function deepCopy(obj) {
  * 传入对象的属性，字符串格式
  * 例如 this.list.sort(ascending("id"));
  */
-export function descending(field ) {
+export function descending(field) {
   return (x, y) => {
     return y[field] - x[field];
   }
@@ -112,6 +199,25 @@ export function objectAssign(target) {
 };
 
 /**
+ * 下载base64文件
+ * @param base64Str
+ * @param fileName
+ */
+export function downLoad(base64Str, fileName = 'file') {
+  let base64 = base64Str;
+  var arr = base64.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  saveAs(new File([u8arr], fileName, {type: mime}))
+}
+
+
+/**
  * 将file转换成base64编码的字符串
  */
 export function file2Base64(file) {
@@ -134,7 +240,7 @@ export function file2Base64(file) {
 }
 
 export function timeout(res) {
-  return new Promise((resolve,reject) =>
+  return new Promise((resolve, reject) =>
     setTimeout(() => resolve(res), 0.5 * 1000));
 }
 

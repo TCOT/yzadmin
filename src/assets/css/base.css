@@ -1,14 +1,16 @@
-body{
+body {
     height: 100%;
     margin: 0;
     padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #e1e1e1 #f3f3f3;
 }
 
-html{
+html {
     height: 100%;
     width: 100%;
 }
 
-#app{
+#app {
     height: 100%;
 }

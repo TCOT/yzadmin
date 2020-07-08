@@ -27,7 +27,6 @@
         v-loading="loading"
         :data="tempList"
         @selection-change="handleSelectionChange"
-        :filter-method="filterHandler"
         border
         highlight-current-row>
       <el-table-column
@@ -92,7 +91,7 @@
         direction="rtl"
         size="900px"
     >
-      <create-one v-if="createDrawer"/>
+      <create-one @cancelCreate="createDrawer = false" v-if="createDrawer"/>
     </el-drawer>
   </div>
 </template>
@@ -154,11 +153,6 @@
       },
     },
     methods: {
-      filterHandler(value, row, column) {
-        console.dir(value);
-        console.dir(row);
-        console.dir(column);
-      },
       handleSelectionChange(val) {
         this.selectedRows = []
         for (let item of val) {
